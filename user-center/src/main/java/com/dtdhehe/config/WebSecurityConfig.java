@@ -26,14 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/loginPage")
-                .loginProcessingUrl("/doLogin")
+//                .loginPage("/loginPage")
+//                .loginProcessingUrl("/doLogin")
 //                .successHandler(successHandler)
 //                .failureHandler(failedHandler)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/loginPage","/doLogin")
-                .permitAll().and().csrf().disable();
+                .permitAll().anyRequest().authenticated().and().csrf().disable();
     }
 
 }
