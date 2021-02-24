@@ -1,6 +1,7 @@
 package com.dtdhehe.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dtdhehe.dto.UserDto;
 import com.dtdhehe.entity.TbUser;
 
 /**
@@ -18,4 +19,10 @@ public interface UserService extends IService<TbUser> {
      */
     TbUser findByUsername(String username);
 
+    /**
+     * 保存用户
+     * @param userDto
+     * @return
+     */
+    void saveUser(UserDto userDto) throws Exception;
 }

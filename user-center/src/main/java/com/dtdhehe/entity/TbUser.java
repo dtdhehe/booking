@@ -1,8 +1,6 @@
 package com.dtdhehe.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -23,12 +21,15 @@ public class TbUser {
     /** 创建人 */
     private String createdBy ;
     /** 创建时间 */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdTime ;
     /** 更新人 */
     private String updatedBy ;
     /** 更新时间 */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedTime ;
     /** 有效标志;(0:无效；1:有效) */
+    @TableField(fill = FieldFill.INSERT)
     private String validFlag ;
     /** 用户登录名 */
     private String loginName ;
