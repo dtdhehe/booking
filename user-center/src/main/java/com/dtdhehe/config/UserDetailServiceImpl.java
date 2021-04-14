@@ -21,7 +21,7 @@ import java.util.List;
  * @date 2021/2/24 16:03
  * @description
  **/
-@Component
+@Component("customUserDetailService")
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
