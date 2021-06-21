@@ -3,6 +3,7 @@ package com.dtdhehe.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -53,7 +54,7 @@ public class JwtTokenUtil {
      * @return
      */
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecurityProperties.getSecret()).parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(jwtSecurityProperties.getSecret()).build().parseClaimsJws(token).getBody();
     }
 
     /**
@@ -83,7 +84,8 @@ public class JwtTokenUtil {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtSecurityProperties.getExpireTime() * 1000))
-                .signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(jwtSecurityProperties.getSecret().getBytes())).compact();
+                .signWith(Keys.hmacShaKeyFor(Base64.getEncoder().encode(jwtSecurityProperties.getSecret().getBytes())), SignatureAlgorithm.HS512)
+                .compact();
     }
 
     /**
