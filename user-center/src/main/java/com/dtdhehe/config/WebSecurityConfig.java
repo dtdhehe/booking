@@ -2,6 +2,8 @@ package com.dtdhehe.config;
 
 import com.dtdhehe.security.JwtSecurityProperties;
 import com.dtdhehe.security.JwtTokenFilter;
+import com.dtdhehe.security.handler.FailureHandler;
+import com.dtdhehe.security.handler.UnLoginEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtSecurityProperties jwtSecurityProperties;
+    @Autowired
+    private FailureHandler failureHandler;
+    @Autowired
+    private UnLoginEntryPoint unLoginEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -56,11 +62,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+        http.cors().and().formLogin()
 //                .loginPage("/loginPage")
 //                .loginProcessingUrl("/doLogin")
 //                .successHandler(successHandler)
-//                .failureHandler(failedHandler)
+                .failureHandler(failureHandler)
+                .and()
+                .exceptionHandling().authenticationEntryPoint(unLoginEntryPoint)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/loginPage","/doLogin").permitAll()

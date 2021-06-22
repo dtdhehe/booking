@@ -1,5 +1,6 @@
 package com.dtdhehe.controller;
 
+import com.dtdhehe.common.data.JsonResult;
 import com.dtdhehe.entity.TbUser;
 import com.dtdhehe.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -35,11 +33,12 @@ public class LoginController {
     private JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("/doLogin")
-    public String login(@RequestBody TbUser user) throws Exception{
+    public JsonResult<String> login(@RequestBody TbUser user) throws Exception{
         authenticate(user.getLoginName(), user.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(user.getLoginName());
-        return jwtTokenUtil.generateToken(userDetails);
+        String token = jwtTokenUtil.generateToken(userDetails);
+        return JsonResult.success(token);
     }
 
     private void authenticate(String username, String password) throws Exception {
