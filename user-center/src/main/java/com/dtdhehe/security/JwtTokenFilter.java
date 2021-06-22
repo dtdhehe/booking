@@ -2,6 +2,7 @@ package com.dtdhehe.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,7 +36,8 @@ public class JwtTokenFilter extends GenericFilterBean {
     private static final String BEARER = "Bearer";
 
     public JwtTokenFilter(UserDetailsService userDetailsService,String secret){
-        this.secret = Base64.getEncoder().encodeToString(secret.getBytes());
+//        this.secret = Base64.getEncoder().encodeToString(secret.getBytes());
+        this.secret = secret;
         this.userDetailsService = userDetailsService;
     }
 
@@ -66,12 +68,12 @@ public class JwtTokenFilter extends GenericFilterBean {
     }
 
     private Date getClaimFromToken(String token, Function<Claims, Date> claimsResolver) {
-        final Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        final Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes())).build().parseClaimsJws(token).getBody();
         return claimsResolver.apply(claims);
     }
 
     private String getClaimFromTokenS(String token, Function<Claims, String> claimsResolver) {
-        final Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        final Claims claims = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes())).build().parseClaimsJws(token).getBody();
         return claimsResolver.apply(claims);
     }
 

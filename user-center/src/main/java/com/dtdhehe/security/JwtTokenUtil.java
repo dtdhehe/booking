@@ -54,7 +54,7 @@ public class JwtTokenUtil {
      * @return
      */
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(jwtSecurityProperties.getSecret()).build().parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(jwtSecurityProperties.getSecret().getBytes())).build().parseClaimsJws(token).getBody();
     }
 
     /**
@@ -84,7 +84,7 @@ public class JwtTokenUtil {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtSecurityProperties.getExpireTime() * 1000))
-                .signWith(Keys.hmacShaKeyFor(Base64.getEncoder().encode(jwtSecurityProperties.getSecret().getBytes())), SignatureAlgorithm.HS512)
+                .signWith(Keys.hmacShaKeyFor(jwtSecurityProperties.getSecret().getBytes()), SignatureAlgorithm.HS512)
                 .compact();
     }
 

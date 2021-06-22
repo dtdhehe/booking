@@ -16,4 +16,5 @@ mybatis-plus:
 
 my:
   jwt:
-    secret: dtdhehe
+    #base64 encode 2 times : this is dtdhehe's secret by booking app
+    secret: WkVkb2NHTjVRbkJqZVVKclpFZFNiMXBYYUd4S00wMW5ZekpXYW1OdFZqQkpSMG8xU1VkS2RtSXlkSEJpYldObldWaENkdw==
