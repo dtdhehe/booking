@@ -1,15 +1,18 @@
 package com.dtdhehe.system.controller;
 
+import com.dtdhehe.common.data.JsonResult;
 import com.dtdhehe.common.exception.ParamException;
-import com.dtdhehe.dto.UserDto;
-import com.dtdhehe.service.UserService;
+import com.dtdhehe.common.exception.ServiceException;
 import com.dtdhehe.system.data.vo.UserVO;
+import com.dtdhehe.system.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 /**
  * @author Xie_东
@@ -25,17 +28,11 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public String saveUser(@RequestBody UserVO userVO){
+    public JsonResult<UserVO> saveUser(@RequestBody UserVO userVO){
         if (StringUtils.isEmpty(userVO.getLoginName()) || StringUtils.isEmpty(userVO.getPassword())){
             throw new ParamException("用户名或密码不能为空!");
         }
-        try {
-//            userService.saveUser(userDto);
-            return "保存成功";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "保存失败";
-        }
+        return JsonResult.success(userService.saveUser(userVO).orElseThrow(() -> new ServiceException("用户保存失败")));
     }
 
 }

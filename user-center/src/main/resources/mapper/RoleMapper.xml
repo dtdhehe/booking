@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dtdhehe.mapper.RoleMapper">
 
-    <select id="getByUserId" resultType="com.dtdhehe.entity.TbRole">
+    <select id="getByUserId" resultType="com.dtdhehe.entity.SysRole">
         SELECT a.*
-        FROM tb_role a
-        left join tb_user_role b on a.id = b.user_id
+        FROM sys_role a
+        left join sys_user_role b on a.id = b.user_id
         where b.user_id = #{userId}
     </select>
 

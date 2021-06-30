@@ -1,6 +1,7 @@
 package com.dtdhehe.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  **/
 @TableName(value="sys_user")
 @Data
+@Builder
 public class SysUser {
 
     /** 主键 */
@@ -41,7 +43,7 @@ public class SysUser {
     private String nickname ;
     /** 性别;(0：未设置；1：男；2：女) */
     private String sex ;
-    /** 身份标识;(0:超级管理员;1:普通用户;2:加盟店家) */
+    /** 身份标识;(0:超级管理员;1:普通用户;) */
     private String userType ;
 
 }

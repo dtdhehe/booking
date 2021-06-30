@@ -3,6 +3,7 @@ package com.dtdhehe.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
  **/
 @TableName(value="sys_user_role")
 @Data
+@Builder
 public class SysUserRole {
 
     /** 主键 */
@@ -31,8 +33,8 @@ public class SysUserRole {
     /** 有效标志;(0:无效;1:有效) */
     private String validFlag ;
     /** 用户id */
-    private String userId ;
+    private Long userId ;
     /** 角色id */
-    private String roleId ;
+    private Long roleId ;
 
 }

@@ -19,10 +19,4 @@ public interface UserService extends IService<SysUser> {
      */
     SysUser findByUsername(String username);
 
-    /**
-     * 保存用户
-     * @param userDto
-     * @return
-     */
-    void saveUser(UserDto userDto) throws Exception;
 }

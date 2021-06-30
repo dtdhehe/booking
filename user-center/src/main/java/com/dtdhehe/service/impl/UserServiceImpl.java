@@ -25,17 +25,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         return baseMapper.selectOne(wrapper);
     }
 
-    @Override
-    public void saveUser(UserDto userDto) throws Exception{
-        SysUser user = new SysUser();
-        BeanUtils.copyProperties(userDto,user);
-        // 密码加密
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        // 默认设置身份标识
-        user.setUserType("1");
-        int insertFlag = baseMapper.insert(user);
-        if (insertFlag != 1){
-            throw new Exception("保存失败");
-        }
-    }
 }
