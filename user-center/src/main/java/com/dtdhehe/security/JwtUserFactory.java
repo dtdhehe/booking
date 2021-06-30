@@ -1,7 +1,7 @@
 package com.dtdhehe.security;
 
-import com.dtdhehe.entity.TbRole;
-import com.dtdhehe.entity.TbUser;
+import com.dtdhehe.entity.SysRole;
+import com.dtdhehe.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -18,14 +18,14 @@ public class JwtUserFactory {
 
     private JwtUserFactory(){}
 
-    public static JwtUser createJwtUser(TbUser user, List<TbRole> roleList){
+    public static JwtUser createJwtUser(SysUser user, List<SysRole> roleList){
         return JwtUser.builder()
                 .id(user.getId())
                 .username(user.getLoginName())
                 .password(user.getPassword())
                 .mobileNum(user.getMobileNum())
                 .nickname(user.getNickname())
-                .authorities(mapToGrantedAuthorities(roleList.stream().map(TbRole :: getRoleName).collect(Collectors.toList())))
+                .authorities(mapToGrantedAuthorities(roleList.stream().map(SysRole :: getRoleName).collect(Collectors.toList())))
                 .build();
     }
 

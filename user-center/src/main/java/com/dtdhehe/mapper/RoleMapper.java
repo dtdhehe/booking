@@ -1,7 +1,7 @@
 package com.dtdhehe.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dtdhehe.entity.TbRole;
+import com.dtdhehe.entity.SysRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.List;
  * @date 2021/3/19 15:50
  * @description
  **/
-public interface RoleMapper extends BaseMapper<TbRole> {
+public interface RoleMapper extends BaseMapper<SysRole> {
 
     /**
      * 根据用户id查询所有角色
      * @param userId
      * @return
      */
-    List<TbRole> getByUserId(@Param("userId") Long userId);
+    List<SysRole> getByUserId(@Param("userId") Long userId);
 
 }

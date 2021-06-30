@@ -1,7 +1,7 @@
 package com.dtdhehe.controller;
 
 import com.dtdhehe.common.data.JsonResult;
-import com.dtdhehe.entity.TbUser;
+import com.dtdhehe.entity.SysUser;
 import com.dtdhehe.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +33,7 @@ public class LoginController {
     private JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("/doLogin")
-    public JsonResult<String> login(@RequestBody TbUser user) throws Exception{
+    public JsonResult<String> login(@RequestBody SysUser user) throws Exception{
         authenticate(user.getLoginName(), user.getPassword());
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(user.getLoginName());

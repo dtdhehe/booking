@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
  * @date 2021/2/23 17:56
  * @description
  **/
-@TableName(value="tb_role_menu")
+@TableName(value="sys_role_menu")
 @Data
-public class TbRoleMenu {
+public class SysRoleMenu {
 
     /** 主键 */
     @TableId(type = IdType.ASSIGN_ID)

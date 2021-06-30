@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 /**
  * @author Xie_东
  * @version 1.0.0
- * @date 2021/2/23 17:54
+ * @date 2021/2/23 17:52
  * @description
  **/
-@TableName(value="tb_user_role")
+@TableName(value="sys_menu")
 @Data
-public class TbUserRole {
+public class SysMenu {
 
     /** 主键 */
     @TableId(type = IdType.ASSIGN_ID)
@@ -30,9 +30,17 @@ public class TbUserRole {
     private LocalDateTime updatedTime ;
     /** 有效标志;(0:无效;1:有效) */
     private String validFlag ;
-    /** 用户id */
-    private String userId ;
-    /** 角色id */
-    private String roleId ;
+    /** 菜单名称 */
+    private String menuName ;
+    /** 菜单编码;(3位为一级菜单) */
+    private String menuCode ;
+    /** 父菜单名称 */
+    private String menuParentName ;
+    /** 父菜单编码;一级菜单默认为空 */
+    private String menuParentCode ;
+    /** 菜单图表;font-awesome */
+    private String menuIcon ;
+    /** 备注 */
+    private String remark ;
 
 }

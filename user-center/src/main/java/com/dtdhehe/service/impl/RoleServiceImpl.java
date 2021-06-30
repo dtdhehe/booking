@@ -1,7 +1,7 @@
 package com.dtdhehe.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dtdhehe.entity.TbRole;
+import com.dtdhehe.entity.SysRole;
 import com.dtdhehe.mapper.RoleMapper;
 import com.dtdhehe.service.RoleService;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ import java.util.List;
  * @description
  **/
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleMapper,TbRole> implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleMapper, SysRole> implements RoleService {
     @Override
-    public List<TbRole> getRoleListByUserId(Long userId) {
+    public List<SysRole> getRoleListByUserId(Long userId) {
         return baseMapper.getByUserId(userId);
     }
 }

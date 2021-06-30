@@ -1,7 +1,7 @@
 package com.dtdhehe.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dtdhehe.entity.TbUser;
+import com.dtdhehe.entity.SysUser;
 
 /**
  * @author Xie_东
@@ -9,5 +9,5 @@ import com.dtdhehe.entity.TbUser;
  * @date 2021/2/24 16:14
  * @description
  **/
-public interface UserMapper extends BaseMapper<TbUser> {
+public interface UserMapper extends BaseMapper<SysUser> {
 }

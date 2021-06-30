@@ -1,7 +1,9 @@
-package com.dtdhehe.controller;
+package com.dtdhehe.system.controller;
 
+import com.dtdhehe.common.exception.ParamException;
 import com.dtdhehe.dto.UserDto;
 import com.dtdhehe.service.UserService;
+import com.dtdhehe.system.data.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +25,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public String saveUser(@RequestBody UserDto userDto){
-        if (StringUtils.isEmpty(userDto.getLoginName()) || StringUtils.isEmpty(userDto.getPassword())){
-            return "用户名或密码不能为空";
+    public String saveUser(@RequestBody UserVO userVO){
+        if (StringUtils.isEmpty(userVO.getLoginName()) || StringUtils.isEmpty(userVO.getPassword())){
+            throw new ParamException("用户名或密码不能为空!");
         }
         try {
-            userService.saveUser(userDto);
+//            userService.saveUser(userDto);
             return "保存成功";
         }catch (Exception e){
             e.printStackTrace();

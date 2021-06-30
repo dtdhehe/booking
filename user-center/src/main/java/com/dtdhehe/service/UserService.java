@@ -2,7 +2,7 @@ package com.dtdhehe.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dtdhehe.dto.UserDto;
-import com.dtdhehe.entity.TbUser;
+import com.dtdhehe.entity.SysUser;
 
 /**
  * @author Xie_东
@@ -10,14 +10,14 @@ import com.dtdhehe.entity.TbUser;
  * @date 2021/2/24 16:15
  * @description
  **/
-public interface UserService extends IService<TbUser> {
+public interface UserService extends IService<SysUser> {
 
     /**
      * 根据用户名查找用户
      * @param username
      * @return
      */
-    TbUser findByUsername(String username);
+    SysUser findByUsername(String username);
 
     /**
      * 保存用户

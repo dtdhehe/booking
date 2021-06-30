@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
  * @date 2021/2/23 17:02
  * @description
  **/
-@TableName(value="tb_user")
+@TableName(value="sys_user")
 @Data
-public class TbUser {
+public class SysUser {
 
     /** 主键 */
     @TableId(type = IdType.ASSIGN_ID)

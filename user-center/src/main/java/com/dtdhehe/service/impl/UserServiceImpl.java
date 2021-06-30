@@ -3,7 +3,7 @@ package com.dtdhehe.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dtdhehe.dto.UserDto;
-import com.dtdhehe.entity.TbUser;
+import com.dtdhehe.entity.SysUser;
 import com.dtdhehe.mapper.UserMapper;
 import com.dtdhehe.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -17,17 +17,17 @@ import org.springframework.stereotype.Service;
  * @description
  **/
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, TbUser> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService {
     @Override
-    public TbUser findByUsername(String username) {
-        QueryWrapper<TbUser> wrapper = new QueryWrapper<>();
+    public SysUser findByUsername(String username) {
+        QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
         wrapper.eq("LOGIN_NAME",username);
         return baseMapper.selectOne(wrapper);
     }
 
     @Override
     public void saveUser(UserDto userDto) throws Exception{
-        TbUser user = new TbUser();
+        SysUser user = new SysUser();
         BeanUtils.copyProperties(userDto,user);
         // 密码加密
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
