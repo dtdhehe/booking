@@ -7,11 +7,6 @@ import lombok.Data;
 public class JsonResult<T> {
 
     /**
-     * 是否成功
-     */
-    private boolean success;
-
-    /**
      * 数据
      */
     private T data;
@@ -19,12 +14,12 @@ public class JsonResult<T> {
     /**
      * 错误吗
      */
-    private Integer errorCode;
+    private Integer code;
 
     /**
      * 错误消息
      */
-    private String errorMessage;
+    private String message;
 
     /**
      * 调用成功，不响应数据
@@ -33,7 +28,7 @@ public class JsonResult<T> {
      */
     public static <T> JsonResult<T> success() {
         JsonResult<T> result = new JsonResult<>();
-        result.setSuccess(true);
+        result.setCode(200);
         return result;
     }
 
@@ -44,7 +39,7 @@ public class JsonResult<T> {
      */
     public static <T> JsonResult<T> success(T data) {
         JsonResult<T> result = new JsonResult<>();
-        result.setSuccess(true);
+        result.setCode(200);
         result.setData(data);
         return result;
     }
@@ -77,8 +72,8 @@ public class JsonResult<T> {
      */
     public static <T> JsonResult<T> error(Integer errorCode, String errorMessage) {
         JsonResult<T> result = new JsonResult<>();
-        result.setErrorCode(errorCode);
-        result.setErrorMessage(errorMessage);
+        result.setCode(errorCode);
+        result.setMessage(errorMessage);
         return result;
     }
 
